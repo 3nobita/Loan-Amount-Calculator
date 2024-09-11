@@ -7,7 +7,51 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .navbar button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
         }
 
         label {
@@ -20,6 +64,7 @@
             margin-bottom: 10px;
             padding: 10px;
             width: 100%;
+            box-sizing: border-box;
         }
 
         button {
@@ -27,6 +72,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
@@ -36,28 +82,37 @@
         .result {
             margin-top: 20px;
             font-size: 1.2em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Loan Amount Calculator</h1>
-    <form id="calculator-form">
-        <label for="emi">EMI:</label>
-        <input type="number" id="emi" placeholder="Enter EMI" />
+    <div class="navbar">
+        <button onclick="window.location.href='https://3nobita.github.io/EMI-CALCULATOR/'">EMI Calculator</button>
+        <button onclick="window.location.href='https://3nobita.github.io/Loan-Eligibility-Calculator/'">Loan Eligibility Calculator
+        </button>
+    </div>
+    
+    <div class="container">
+        <h1>Loan Amount Calculator</h1>
+        <form id="calculator-form">
+            <label for="emi">EMI:</label>
+            <input type="number" id="emi" placeholder="Enter EMI" />
 
-        <label for="tenure">Tenure (Years):</label>
-        <input type="number" id="tenure" placeholder="Enter Tenure in Years" />
+            <label for="tenure">Tenure (Years):</label>
+            <input type="number" id="tenure" placeholder="Enter Tenure in Years" />
 
-        <label for="payment-mode">Payment Mode (Months):</label>
-        <input type="number" id="payment-mode" placeholder="Enter Number of Payments per Year" />
+            <label for="payment-mode">Payment Mode (Months per Year):</label>
+            <input type="number" id="payment-mode" placeholder="Enter Number of Payments per Year" />
 
-        <label for="interest-rate">Rate of Interest (%):</label>
-        <input type="number" id="interest-rate" placeholder="Enter Rate of Interest" step="0.01" />
+            <label for="interest-rate">Rate of Interest (%):</label>
+            <input type="number" id="interest-rate" placeholder="Enter Rate of Interest" step="0.01" />
 
-        <button type="button" onclick="calculateLoanAmount()">Calculate Loan Amount</button>
+            <button type="button" onclick="calculateLoanAmount()">Calculate Loan Amount</button>
 
-        <div class="result" id="result"></div>
-    </form>
+            <div class="result" id="result"></div>
+        </form>
+    </div>
 
     <script>
         function calculateLoanAmount() {
