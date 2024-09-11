@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Amount Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input,
+        button {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Loan Amount Calculator</h1>
+    <form id="calculator-form">
+        <label for="emi">EMI:</label>
+        <input type="number" id="emi" placeholder="Enter EMI" />
+
+        <label for="tenure">Tenure (Years):</label>
+        <input type="number" id="tenure" placeholder="Enter Tenure in Years" />
+
+        <label for="payment-mode">Payment Mode (Months):</label>
+        <input type="number" id="payment-mode" placeholder="Enter Number of Payments per Year" />
+
+        <label for="interest-rate">Rate of Interest (%):</label>
+        <input type="number" id="interest-rate" placeholder="Enter Rate of Interest" step="0.01" />
+
+        <button type="button" onclick="calculateLoanAmount()">Calculate Loan Amount</button>
+
+        <div class="result" id="result"></div>
+    </form>
+
+    <script>
+        function calculateLoanAmount() {
+            // Get values from the form
+            const emi = parseFloat(document.getElementById('emi').value) || 0;
+            const tenureYears = parseFloat(document.getElementById('tenure').value) || 0;
+            const paymentMode = parseFloat(document.getElementById('payment-mode').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) || 0;
+
+            // Calculate loan amount using the EMI capacity
+            const numberOfPayments = tenureYears * paymentMode;
+            const monthlyInterestRate = (interestRate / 100) / paymentMode;
+
+            let loanAmount;
+            if (monthlyInterestRate === 0) {
+                // Special case: if the interest rate is 0%
+                loanAmount = emi * numberOfPayments;
+            } else {
+                // General case
+                loanAmount = emi * ((1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments)) / monthlyInterestRate);
+            }
+
+            // Display the result
+            document.getElementById('result').textContent = `Eligible Loan Amount: ₹${loanAmount.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
